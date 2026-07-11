@@ -19,7 +19,7 @@ const DB_PATH = path.join(__dirname, 'data', 'db.json');
 // API to login admin using credentials
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
-    if (username && username.toLowerCase() === 'admin' && password === 'eighteen18') {
+    if (username && username.toLowerCase() === 'admin' && password === '1234') {
         res.json({ success: true, token: 'mock-admin-session-token-18' });
     } else {
         res.status(401).json({ success: false, error: 'Invalid username or password' });
@@ -36,7 +36,7 @@ app.post('/api/upload', (req, res) => {
     try {
         const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, "");
         const filePath = path.join(__dirname, 'assets', filename);
-        
+
         fs.writeFile(filePath, base64Data, 'base64', (err) => {
             if (err) {
                 console.error('Error writing file:', err);
@@ -69,7 +69,7 @@ app.get('/api/data', (req, res) => {
 // API to POST/UPDATE the database status
 app.post('/api/data', (req, res) => {
     const updatedData = req.body;
-    
+
     // Simple validation of structure
     if (!updatedData.hero || !updatedData.categories || !updatedData.promos || !updatedData.products) {
         return res.status(400).json({ error: 'Invalid store database schema. Products list is required.' });
