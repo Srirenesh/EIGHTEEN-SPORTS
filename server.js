@@ -19,7 +19,7 @@ const DB_PATH = path.join(__dirname, 'data', 'db.json');
 // API to login admin using credentials
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
-    if (username && username.toLowerCase() === 'admin' && password === '1234') {
+    if (username && username.toLowerCase() === 'admin' && password === 'eighteen18') {
         res.json({ success: true, token: 'mock-admin-session-token-18' });
     } else {
         res.status(401).json({ success: false, error: 'Invalid username or password' });
