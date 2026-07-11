@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eighteen Sports | Administrative Login</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Outfit:wght@500;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .login-body {
+            background-color: #060606;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-card {
+            background-color: #111111;
+            border: 1px solid #222222;
+            border-radius: 8px;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .login-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 12px;
+        }
+
+        .login-logo img {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #222222;
+        }
+
+        .login-brand-text {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .login-brand-text span {
+            color: #c61a23;
+        }
+
+        .login-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #aaaaaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: #888888;
+        }
+
+        .form-group input {
+            background-color: #1a1a1a;
+            border: 1px solid #2c2c2c;
+            border-radius: 4px;
+            color: #ffffff;
+            padding: 12px 15px;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #c61a23;
+            box-shadow: 0 0 10px rgba(198, 26, 35, 0.2);
+        }
+
+        .btn-login {
+            background-color: #c61a23;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 15px;
+            border-radius: 4px;
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(198, 26, 35, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #a5131a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(198, 26, 35, 0.6);
+        }
+
+        .login-error {
+            background-color: rgba(231, 76, 60, 0.15);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: none;
+            text-align: left;
+        }
+
+        .back-to-site {
+            display: inline-block;
+            margin-top: 25px;
+            font-size: 12px;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .back-to-site:hover {
+            color: #999;
+        }
+    </style>
+</head>
+
+<body class="login-body">
+    <div class="login-card">
+        <div class="login-logo">
+            <img src="assets/logo.png" alt="Eighteen Sports Logo">
+            <div class="login-brand-text">EIGHTEEN <span>SPORTS</span></div>
+        </div>
+
+        <h1 class="login-title">Control Panel Access</h1>
+
+        <div class="login-error" id="loginError"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">username</label>
+                <input type="text" id="username" placeholder="Enter admin username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">password</label>
+                <input type="password" id="password" placeholder="Enter admin password" required>
+            </div>
+            <button type="submit" class="btn-login">Verify Credentials</button>
+        </form>
+
+        <a href="/" class="back-to-site">← Return to Storefront</a>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const usernameInput = document.getElementById('username').value;
+            const passwordInput = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+
+            errorDiv.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username: usernameInput, password: passwordInput })
+                });
+
+                if (!response.ok) {
+                    const errData = await response.json();
+                    throw new Error(errData.error || 'Authentication failed');
+                }
+
+                const data = await response.json();
+                if (data.success && data.token) {
+                    // Save token and redirect
+                    localStorage.setItem('adminToken', data.token);
+                    window.location.href = '/admin';
+                }
+            } catch (err) {
+                errorDiv.textContent = err.message;
+                errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+
+    <!-- Premium SEO Metadata -->
+    <title>Eighteen Sports | Premium Cricket Gear Store</title>
+    <meta name="description"
+        content="Eighteen Sports is your premier destination for high-quality, professional-grade cricket gear. Buy English Willow bats, batting gloves, pads, helmets, and cricket accessories online with free shipping.">
+    <meta name="keywords"
+        content="cricket gear, english willow bats, cricket bats online, cricket helmet, batting gloves, cricket pads, wicket keeping gloves, eighteen sports">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="http://localhost:8080/">
+
+    <!-- OpenGraph (Facebook/LinkedIn) Meta Tags -->
+    <meta property="og:title" content="Eighteen Sports | Premium Cricket Gear Store">
+    <meta property="og:description"
+        content="Get premium quality cricket bats, pads, gloves, and accessories online at Eighteen Sports. Play hard, play fearless. Free shipping above ₹999.">
+    <meta property="og:image" content="http://localhost:8080/assets/hero_gear_banner.png">
+    <meta property="og:url" content="http://localhost:8080/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Eighteen Sports">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Eighteen Sports | Premium Cricket Gear Store">
+    <meta name="twitter:description"
+        content="Get premium quality cricket bats, pads, gloves, and accessories online at Eighteen Sports. Free shipping above ₹999.">
+    <meta name="twitter:image" content="http://localhost:8080/assets/hero_gear_banner.png">
+
+    <!-- JSON-LD Structured Data Schema for Google Search SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportingGoodsStore",
+      "name": "Eighteen Sports",
+      "image": "http://localhost:8080/assets/hero_gear_banner.png",
+      "@id": "http://localhost:8080/#store",
+      "url": "http://localhost:8080/",
+      "telephone": "+919876543210",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "18 Sports Avenue, Cricket District",
+        "addressLocality": "Chennai",
+        "addressRegion": "Tamil Nadu",
+        "postalCode": "600001",
+        "addressCountry": "IN"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "21:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/eighteensports",
+        "https://www.instagram.com/eighteensports"
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Outfit:wght@500;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Link Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- GSAP & ScrollTrigger Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="preloader-active">
+    <!-- Cinematic Video Preloader -->
+    <div class="intro-preloader" id="preloader">
+        <video autoplay muted playsinline class="preloader-video" id="preloaderVideo">
+            <source src="assets/intro_video.mp4" type="video/mp4">
+        </video>
+        <button class="skip-btn" id="skipPreloader">Skip Intro</button>
+    </div>
+
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="announcement-left">
+            <span>Welcome to <span class="highlight-red">Eighteen Sports</span></span>
+        </div>
+        <div class="announcement-center">
+            <span>FREE SHIPPING on orders above <span class="highlight-red">₹999</span></span>
+        </div>
+        <div class="announcement-right">
+            <a href="#" class="announcement-link">Track Order</a>
+            <span class="separator">|</span>
+            <a href="#" class="announcement-link">Support <i class="support-icon"></i></a>
+        </div>
+    </div>
+
+    <!-- Main Header / Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Brand Logo -->
+            <a href="#" class="brand-logo" id="logoLink">
+                <div class="logo-badge">
+                    <img src="assets/logo.png" alt="Eighteen Sports Logo"
+                        style="width: 46px; height: 46px; border-radius: 50%; display: block; object-fit: cover;">
+                </div>
+                <div class="logo-text">
+                    <span class="logo-brand-top">EIGHTEEN</span>
+                    <span class="logo-brand-bottom">SPORTS</span>
+                </div>
+            </a>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#" class="nav-link active">HOME</a></li>
+                    <li><a href="#about" class="nav-link">ABOUT</a></li>
+                    <li><a href="#location" class="nav-link">LOCATION</a></li>
+                </ul>
+            </nav>
+
+            <!-- User / Utility Icons -->
+            <div class="utility-icons">
+                <!-- Search Icon -->
+                <button class="icon-btn" id="searchBtn" aria-label="Search">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <!-- Profile Icon -->
+                <button class="icon-btn" id="profileBtn" aria-label="Profile">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </button>
+                <!-- Cart Icon -->
+                <button class="icon-btn cart-btn" id="cartBtn" aria-label="Shopping Cart">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <input type="text" class="search-input"
+                placeholder="Search premium cricket gear (e.g. English Willow, Helmets)..." id="searchInput">
+            <button class="search-close-btn" id="searchCloseBtn">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hero Banner Section -->
+    <section class="hero-section">
+        <!-- Giant background watermark -->
+        <div class="hero-watermark">
+            <img src="assets/logo.png" alt="Eighteen Sports Watermark" class="hero-watermark-img">
+        </div>
+
+        <div class="hero-container">
+            <!-- Left Hero Content -->
+            <div class="hero-content" id="heroContent">
+                <span class="hero-subtitle" id="heroSubtitle">EIGHTEEN SPORTS</span>
+                <h1 class="hero-title" id="heroTitle">
+                    PLAY HARD.<br>
+                    PLAY FEARLESS.<br>
+                    <span class="text-red">PLAY EIGHTEEN.</span>
+                </h1>
+                <p class="hero-description" id="heroDescription">
+                    Your one-stop destination for premium quality cricket gear.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-red" id="shopNowBtn">SHOP NOW <span class="arrow">→</span></a>
+                    <a href="#" class="btn btn-outline">EXPLORE COLLECTIONS</a>
+                </div>
+            </div>
+
+            <!-- Right Hero Image Showcase -->
+            <div class="hero-image-wrapper">
+                <div class="hero-glow"></div>
+                <img src="assets/hero_gear_banner.png" alt="Premium Cricket Equipment Showcase" class="hero-img"
+                    id="heroImg">
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges Section -->
+    <section class="trust-section">
+        <div class="trust-container">
+            <!-- Badge 1 -->
+            <div class="trust-card animate-fade-in">
+                <div class="trust-icon-box">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <polyline points="9 11 11 13 15 9"></polyline>
+                    </svg>
+                </div>
+                <div class="trust-info">
+                    <h3>100% ORIGINAL</h3>
+                    <p>Genuine & Authentic Products</p>
+                </div>
+            </div>
+            <!-- Divider -->
+            <div class="trust-divider"></div>
+            <!-- Badge 2 -->
+            <div class="trust-card animate-fade-in">
+                <div class="trust-icon-box">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                </div>
+                <div class="trust-info">
+                    <h3>EASY RETURNS</h3>
+                    <p>7 Days Return Policy</p>
+                </div>
+            </div>
+            <!-- Divider -->
+            <div class="trust-divider"></div>
+            <!-- Badge 3 -->
+            <div class="trust-card animate-fade-in">
+                <div class="trust-icon-box">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <div class="trust-info">
+                    <h3>SECURE PAYMENT</h3>
+                    <p>100% Secure Payments</p>
+                </div>
+            </div>
+            <!-- Divider -->
+            <div class="trust-divider"></div>
+            <!-- Badge 4 -->
+            <div class="trust-card animate-fade-in">
+                <div class="trust-icon-box">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <div class="trust-info">
+                    <h3>SUPPORT 24/7</h3>
+                    <p>We're Here to Help</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop By Category Section -->
+    <section class="category-section">
+        <div class="section-title-wrapper">
+            <span class="title-line"></span>
+            <h2 class="section-title">SHOP BY <span class="text-red">CATEGORY</span></h2>
+            <span class="title-line"></span>
+        </div>
+
+        <!-- Horizontal scroll wrapper for mobile drag gestures -->
+        <div class="category-scroll-container" id="categoryScrollContainer">
+            <div class="category-grid" id="categoryGrid">
+                <!-- Fallback Content (SEO Friendly, replaced dynamically by app.js) -->
+                <div class="category-card">
+                    <div class="category-circle"><img src="assets/cat_bats.png" alt="Cricket Bats"></div>
+                    <h3 class="category-name">CRICKET BATS</h3>
+                    <a href="#" class="view-all-link">View All</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-circle"><img src="assets/cat_batting.png" alt="Batting gloves"></div>
+                    <h3 class="category-name">BATTING GLOVES</h3>
+                    <a href="#" class="view-all-link">View All</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-circle"><img src="assets/cat_bowling.png" alt="BALLS"></div>
+                    <h3 class="category-name">BALLS</h3>
+                    <a href="#" class="view-all-link">View All</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="products-section">
+        <div class="section-title-wrapper">
+            <span class="title-line"></span>
+            <h2 class="section-title">FEATURED <span class="text-red">PRODUCTS</span></h2>
+            <span class="title-line"></span>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Fallback Content (SEO Friendly, replaced dynamically by app.js) -->
+            <div class="product-card">
+                <div class="product-img-box">
+                    <img src="assets/cat_bats.png" alt="TON English Willow Bat">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">CRICKET BATS</span>
+                    <h3 class="product-title">TON English Willow Bat</h3>
+                    <div class="product-price-row">
+                        <span class="product-price">₹14,999</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img-box">
+                    <img src="assets/cat_batting.png" alt="SS Elite Batting Gloves">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">BATTING</span>
+                    <h3 class="product-title">SS Elite Batting Gloves</h3>
+                    <div class="product-price-row">
+                        <span class="product-price">₹2,499</span>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Promo Banner Section -->
+    <section class="promo-section">
+        <div class="promo-grid" id="promoGrid">
+            <!-- Fallback Content (SEO Friendly, replaced dynamically by app.js) -->
+            <div class="promo-card"
+                style="background-image: linear-gradient(to right, rgba(0,0,0,0.95) 30%, rgba(0,0,0,0.3) 100%), url('assets/banner_bats.png');">
+                <div class="promo-content">
+                    <span class="promo-label label-red">NEW ARRIVALS</span>
+                    <h2 class="promo-heading">ENGLISH WILLOW<br><span class="text-red">PREMIUM BATS</span></h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-section" id="about">
+        <div class="section-title-wrapper">
+            <span class="title-line"></span>
+            <h2 class="section-title">ABOUT <span class="text-red">US</span></h2>
+            <span class="title-line"></span>
+        </div>
+        <div class="about-container">
+            <div class="about-content">
+                <p>Welcome to <strong>Eighteen Sports</strong>, the ultimate playground for professional cricketers and
+                    enthusiasts alike. Established with a single mission: to equip players with gear that inspires
+                    absolute confidence, power, and fearlessness on the pitch.</p>
+                <p>Our premium line of English Willow bats is handcrafted and engineered with precision weight
+                    distribution, thick profiles, and massive sweet spots. We collaborate with master craftsmen to
+                    ensure that every bat delivered holds the standard of professional-grade quality.</p>
+                <p>Play Hard. Play Fearless. Play Eighteen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section" id="location">
+        <div class="section-title-wrapper">
+            <span class="title-line"></span>
+            <h2 class="section-title">STORE <span class="text-red">LOCATION</span></h2>
+            <span class="title-line"></span>
+        </div>
+        <div class="location-container">
+            <div class="location-card">
+                <div class="location-info">
+                    <h3>EIGHTEEN SPORTS</h3>
+                    <p class="address">Police Station, 165A, near Podanur, Amman Nagar, Podanur, Coimbatore, Tamil Nadu
+                        641023</p>
+                    <p class="hours"><strong>Hours:</strong> Mon - Sat: 9:00 AM - 9:00 PM</p>
+                    <p class="contact"><strong>Phone:</strong> +91 82709 39177 | <strong>Email:</strong>
+                        [EMAIL_ADDRESS]</p>
+                    <a href="https://maps.app.goo.gl/Cv3g1z7z27RN2zJ68" target="_blank" class="btn btn-red"
+                        style="display: inline-block; text-decoration: none; padding: 12px 25px; margin-top: 15px; text-align: center; border-radius: 4px; font-weight: 700; font-size: 12px; letter-spacing: 0.5px;">Get
+                        Directions</a>
+                </div>
+                <div class="location-map">
+                    <a href="https://maps.app.goo.gl/Cv3g1z7z27RN2zJ68" target="_blank"
+                        style="display: block; text-decoration: none; cursor: pointer;">
+                        <svg viewBox="0 0 400 200" width="100%" height="100%"
+                            style="background-color: #111111; border-radius: 4px; border: 1px solid #222; display: block;">
+                            <defs>
+                                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#222" stroke-width="1" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#grid)" />
+                            <path d="M 50 20 Q 150 50 120 120 T 300 180" fill="none" stroke="#2c2c2c"
+                                stroke-width="2" />
+                            <path d="M 200 40 Q 250 120 350 110" fill="none" stroke="#2c2c2c" stroke-width="1.5" />
+                            <circle cx="210" cy="110" r="16" fill="rgba(198, 26, 35, 0.2)" />
+                            <circle cx="210" cy="110" r="8" fill="rgba(198, 26, 35, 0.4)" />
+                            <circle cx="210" cy="110" r="4" fill="#c61a23" />
+                            <circle cx="210" cy="110" r="30" fill="none" stroke="#c61a23" stroke-width="1"
+                                opacity="0.3">
+                                <animate attributeName="r" values="5;35" dur="2s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.8;0" dur="2s" repeatCount="indefinite" />
+                            </circle>
+                            <text x="225" y="115" fill="#ffffff" font-family="'Outfit', sans-serif" font-weight="700"
+                                font-size="12">EIGHTEEN SPORTS</text>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer for Premium feel -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Eighteen Sports. All Rights Reserved. Built with Premium Quality.</p>
+        </div>
+    </footer>
+
+    <!-- App Logic JS -->
+    <script src="app.js"></script>
+</body>
+
+</html>

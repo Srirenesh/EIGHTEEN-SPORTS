@@ -1,0 +1,372 @@
+/* 
+   Eighteen Sports - Admin Control Panel Stylesheet
+   Theme: Dark dashboard aesthetic
+*/
+
+.admin-body {
+    background-color: #0c0c0c;
+    color: #e0e0e0;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+}
+
+.admin-header {
+    background-color: #121212;
+    border-bottom: 1px solid #222222;
+    padding: 15px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.btn-back-store {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease;
+}
+
+.btn-back-store:hover {
+    background-color: #c61a23;
+    border-color: #c61a23;
+    box-shadow: 0 0 15px rgba(198, 26, 35, 0.4);
+}
+
+.admin-main {
+    padding: 50px 5%;
+}
+
+.admin-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.admin-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+    color: #ffffff;
+    margin-bottom: 30px;
+    letter-spacing: -0.5px;
+    border-bottom: 2px solid #222222;
+    padding-bottom: 15px;
+}
+
+/* Status alerts */
+.status-msg {
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 35px;
+    font-size: 14px;
+    font-weight: 600;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+.msg-success {
+    background-color: rgba(46, 204, 113, 0.15);
+    color: #2ecc71;
+    border: 1px solid #2ecc71;
+}
+
+.msg-error {
+    background-color: rgba(231, 76, 60, 0.15);
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+.msg-info {
+    background-color: rgba(52, 152, 219, 0.15);
+    color: #3498db;
+    border: 1px solid #3498db;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Forms and Cards */
+.admin-section-card {
+    background-color: #121212;
+    border: 1px solid #222222;
+    border-radius: 6px;
+    padding: 30px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.section-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #222222;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.section-card-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+/* Grids and rows */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #aaaaaa;
+}
+
+.form-group input,
+.form-group textarea {
+    background-color: #1a1a1a;
+    border: 1px solid #2c2c2c;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 12px 15px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #c61a23;
+    box-shadow: 0 0 10px rgba(198, 26, 35, 0.2);
+}
+
+/* Category lists */
+.categories-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-row-item {
+    display: flex;
+    align-items: center;
+    background-color: #181818;
+    border: 1px solid #282828;
+    border-radius: 4px;
+    padding: 15px;
+    gap: 20px;
+    transition: border-color 0.3s;
+}
+
+.admin-row-item:hover {
+    border-color: #383838;
+}
+
+.row-drag-handle {
+    font-size: 18px;
+    color: #444444;
+    cursor: grab;
+    user-select: none;
+}
+
+.row-fields {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.btn-delete-row {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+.btn-delete-row:hover {
+    background-color: #e74c3c;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+}
+
+.btn-add-item {
+    background-color: #1a1a1a;
+    border: 1px solid #c61a23;
+    color: #c61a23;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+.btn-add-item:hover {
+    background-color: #c61a23;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(198, 26, 35, 0.3);
+}
+
+/* Promos editing */
+.promos-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.promo-form-card {
+    border-left: 3px solid #c61a23;
+    background-color: #181818;
+    padding: 20px;
+    border-radius: 0 4px 4px 0;
+}
+
+.promo-card-index {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #ffffff;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Global Admin Actions */
+.admin-actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 50px;
+    border-top: 2px solid #222222;
+    padding-top: 30px;
+}
+
+.btn-save {
+    background-color: #c61a23;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(198, 26, 35, 0.4);
+    cursor: pointer;
+    flex: 2;
+}
+
+.btn-save:hover {
+    background-color: #a5131a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(198, 26, 35, 0.6);
+}
+
+.btn-reset {
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    color: #aaaaaa;
+    cursor: pointer;
+    flex: 1;
+}
+
+.btn-reset:hover {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Responsiveness */
+@media(max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+    
+    .row-fields {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .admin-row-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .row-drag-handle {
+        text-align: center;
+    }
+}
+
+/* Product layout additions */
+.products-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.product-row .row-fields {
+    grid-template-columns: 2fr 1.5fr 1fr 2fr;
+}
+
+/* Webcam Studio section */
+.studio-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.camera-stream-wrapper {
+    background-color: #161616;
+    border: 1px solid #222222;
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.camera-feed-container {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    border: 2px solid #282828;
+}
+
+#webcamFeed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive for admin row fields */
+@media (max-width: 992px) {
+    .product-row .row-fields {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}

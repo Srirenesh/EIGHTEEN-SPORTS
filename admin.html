@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <title>Eighteen Sports | Storefront Control Panel</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body class="admin-body">
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="header-container">
+            <div class="brand-logo">
+                <div class="logo-badge">
+                    <img src="assets/logo.png" alt="Eighteen Sports Logo" style="width: 46px; height: 46px; border-radius: 50%; display: block; object-fit: cover;">
+                </div>
+                <div class="logo-text">
+                    <span class="logo-brand-top">EIGHTEEN</span>
+                    <span class="logo-brand-bottom">ADMIN PANEL</span>
+                </div>
+            </div>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <a href="/" class="btn-back-store">← View Storefront</a>
+                <button id="logoutBtn" class="btn-delete-row" style="padding: 10px 15px;">Log Out</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="admin-main">
+        <div class="admin-container">
+            <h1 class="admin-title">Storefront Configuration Manager</h1>
+            
+            <div class="status-msg" id="statusMsg"></div>
+
+            <form id="adminForm">
+                <!-- Section 1: Hero Configurations -->
+                <section class="admin-section-card">
+                    <h2 class="section-card-title">1. Hero Banner Settings</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="heroSubtitle">Hero Subtitle</label>
+                            <input type="text" id="heroSubtitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="heroImage">Hero Image Path</label>
+                            <input type="text" id="heroImage" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="heroTitle1">Title Line 1</label>
+                            <input type="text" id="heroTitle1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="heroTitle2">Title Line 2</label>
+                            <input type="text" id="heroTitle2" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="heroTitle3">Title Line 3 (Red Highlight)</label>
+                            <input type="text" id="heroTitle3" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="heroDesc">Hero Description</label>
+                            <textarea id="heroDesc" rows="3" required></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Shop by Category Configurations -->
+                <section class="admin-section-card">
+                    <div class="section-card-header">
+                        <h2 class="section-card-title">2. Category List</h2>
+                        <button type="button" class="btn-add-item" id="addCategoryBtn">+ Add Category</button>
+                    </div>
+                    <div class="categories-list-container" id="categoriesList">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </section>
+
+                <!-- Section 3: Products & Accessories List Manager -->
+                <section class="admin-section-card">
+                    <div class="section-card-header">
+                        <h2 class="section-card-title">3. Manage Products & Accessories</h2>
+                        <button type="button" class="btn-add-item" id="addProductBtn">+ Add Product</button>
+                    </div>
+                    <div class="products-list-container" id="productsList">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </section>
+
+                <!-- Section 4: Photo Studio (HTML5 Camera Capture) -->
+                <section class="admin-section-card">
+                    <h2 class="section-card-title">4. Product Photo Studio (Camera Capture)</h2>
+                    <p style="font-size: 12px; color: #888888; margin-bottom: 20px;">
+                        Select a product, start your camera stream, frame the item, and capture a photo to automatically upload it!
+                    </p>
+                    <div class="studio-grid">
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label for="cameraProductSelect">Assign Photo To Product</label>
+                            <select id="cameraProductSelect" style="background-color: #1a1a1a; color: #fff; padding: 12px; border: 1px solid #222; border-radius: 4px; outline: none; margin-top: 5px;">
+                                <option value="">-- Choose target product --</option>
+                            </select>
+                        </div>
+                        
+                        <div class="camera-stream-wrapper">
+                            <div class="camera-feed-container">
+                                <video id="webcamFeed" autoplay playsinline style="width: 100%; max-height: 280px; background-color: #000; border-radius: 4px; border: 1px solid #222;"></video>
+                                <canvas id="photoCanvas" style="display: none;"></canvas>
+                            </div>
+                            <div class="camera-actions" style="margin-top: 15px; display: flex; gap: 10px;">
+                                <button type="button" id="startCameraBtn" class="btn-add-item">Start Camera</button>
+                                <button type="button" id="snapPhotoBtn" class="btn btn-save" style="flex: unset; padding: 10px 20px; display: none;">Snap & Upload</button>
+                                <button type="button" id="stopCameraBtn" class="btn-delete-row" style="display: none;">Stop Camera</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Promotional Banner Configurations -->
+                <section class="admin-section-card">
+                    <h2 class="section-card-title">5. Bottom Promotional Banners</h2>
+                    <div id="promosList" class="promos-list-container">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </section>
+
+                <!-- Form Action Buttons -->
+                <div class="admin-actions">
+                    <button type="submit" class="btn btn-save" id="saveBtn">Save Storefront Configuration</button>
+                    <button type="button" class="btn btn-reset" id="resetBtn">Revert Changes</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // Check authentication immediately before page loads
+        if (!localStorage.getItem('adminToken')) {
+            window.location.href = '/login';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Logout logic
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('adminToken');
+                window.location.href = '/login';
+            });
+
+            const statusMsg = document.getElementById('statusMsg');
+            const adminForm = document.getElementById('adminForm');
+            const categoriesList = document.getElementById('categoriesList');
+            const productsList = document.getElementById('productsList');
+            const promosList = document.getElementById('promosList');
+            const addCategoryBtn = document.getElementById('addCategoryBtn');
+            const addProductBtn = document.getElementById('addProductBtn');
+            const resetBtn = document.getElementById('resetBtn');
+
+            // Camera Studio elements
+            const cameraProductSelect = document.getElementById('cameraProductSelect');
+            const webcamFeed = document.getElementById('webcamFeed');
+            const photoCanvas = document.getElementById('photoCanvas');
+            const startCameraBtn = document.getElementById('startCameraBtn');
+            const snapPhotoBtn = document.getElementById('snapPhotoBtn');
+            const stopCameraBtn = document.getElementById('stopCameraBtn');
+            
+            let stream = null;
+            let originalData = null;
+            let currentCategories = []; // tracks categories for populating product selectors
+
+            // Fetch initial configuration from Backend API
+            async function loadData() {
+                try {
+                    const response = await fetch('/api/data');
+                    if (!response.ok) throw new Error('Failed to load store configurations');
+                    const data = await response.json();
+                    originalData = JSON.parse(JSON.stringify(data)); // deep clone
+                    
+                    currentCategories = data.categories.map(c => c.name);
+                    populateForm(data);
+                    showStatus('Data loaded successfully!', 'success');
+                } catch (error) {
+                    showStatus('Error loading configurations: ' + error.message, 'error');
+                }
+            }
+
+            // Populate Form Fields
+            function populateForm(data) {
+                // Hero banner
+                document.getElementById('heroSubtitle').value = data.hero.subtitle;
+                document.getElementById('heroImage').value = data.hero.image;
+                document.getElementById('heroTitle1').value = data.hero.title_part1;
+                document.getElementById('heroTitle2').value = data.hero.title_part2;
+                document.getElementById('heroTitle3').value = data.hero.title_part3;
+                document.getElementById('heroDesc').value = data.hero.description;
+
+                // Categories
+                categoriesList.innerHTML = '';
+                data.categories.forEach(cat => renderCategoryRow(cat));
+
+                // Products
+                productsList.innerHTML = '';
+                if (data.products) {
+                    data.products.forEach(prod => renderProductRow(prod));
+                }
+                updateCameraProductDropdown();
+
+                // Promotional banners
+                promosList.innerHTML = '';
+                data.promos.forEach((promo, index) => renderPromoCard(promo, index));
+            }
+
+            // Render single category row
+            function renderCategoryRow(category) {
+                const div = document.createElement('div');
+                div.className = 'admin-row-item category-row';
+                div.dataset.id = category.id;
+                div.innerHTML = `
+                    <div class="row-drag-handle">⋮⋮</div>
+                    <div class="row-fields">
+                        <div class="form-group">
+                            <label>Category Name</label>
+                            <input type="text" class="cat-name" value="${category.name}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category Image Path</label>
+                            <input type="text" class="cat-image" value="${category.image}" required>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-delete-row" onclick="removeCategoryRow(this)">Remove</button>
+                `;
+                categoriesList.appendChild(div);
+            }
+
+            // Remove category row & update category dropdown variables
+            window.removeCategoryRow = function(btn) {
+                btn.parentElement.remove();
+                refreshCategoriesList();
+            };
+
+            function refreshCategoriesList() {
+                const catInputs = document.querySelectorAll('.category-row .cat-name');
+                currentCategories = Array.from(catInputs).map(input => input.value);
+                // Re-render product select fields to stay synced
+                const productSelects = document.querySelectorAll('.product-cat-select');
+                productSelects.forEach(select => {
+                    const val = select.value;
+                    populateCategoryOptions(select, val);
+                });
+            }
+
+            // Render category dropdown options
+            function populateCategoryOptions(selectElement, selectedValue) {
+                selectElement.innerHTML = '';
+                currentCategories.forEach(cat => {
+                    const opt = document.createElement('option');
+                    opt.value = cat;
+                    opt.textContent = cat;
+                    if (cat === selectedValue) {
+                        opt.selected = true;
+                    }
+                    selectElement.appendChild(opt);
+                });
+            }
+
+            // Render single product row
+            function renderProductRow(product) {
+                const div = document.createElement('div');
+                div.className = 'admin-row-item product-row';
+                div.dataset.id = product.id;
+                
+                // Construct inputs
+                div.innerHTML = `
+                    <div class="row-drag-handle">⋮⋮</div>
+                    <div class="row-fields" style="grid-template-columns: 2fr 1.5fr 1fr 2fr;">
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" class="prod-name" value="${product.name}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select class="prod-cat product-cat-select" style="background-color: #1a1a1a; color: #fff; padding: 12px; border: 1px solid #2c2c2c; border-radius: 4px; outline: none; margin-top: 5px;"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Price (₹)</label>
+                            <input type="number" class="prod-price" value="${product.price}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Image Path</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" class="prod-image" id="prodImg_${product.id}" value="${product.image}" style="flex: 1;" required>
+                                <button type="button" class="btn-add-item" onclick="triggerStudioSelect('${product.id}')" style="padding: 10px; font-size: 10px;">Snap</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-delete-row" onclick="removeProductRow(this)">Remove</button>
+                `;
+                
+                // Populate category options in dropdown
+                const selectElement = div.querySelector('.product-cat-select');
+                populateCategoryOptions(selectElement, product.category);
+                
+                productsList.appendChild(div);
+            }
+
+            window.removeProductRow = function(btn) {
+                btn.parentElement.remove();
+                updateCameraProductDropdown();
+            };
+
+            // Trigger linking row selection to Webcam Studio
+            window.triggerStudioSelect = function(id) {
+                cameraProductSelect.value = id;
+                document.getElementById('webcamFeed').scrollIntoView({ behavior: 'smooth' });
+                // If camera isn't running, start it
+                if (!stream) {
+                    startCamera();
+                }
+            };
+
+            // Populate Product list in Webcam Selector
+            function updateCameraProductDropdown() {
+                const prevVal = cameraProductSelect.value;
+                cameraProductSelect.innerHTML = '<option value="">-- Choose target product --</option>';
+                
+                const productRows = document.querySelectorAll('.product-row');
+                productRows.forEach(row => {
+                    const id = row.dataset.id;
+                    const name = row.querySelector('.prod-name').value || 'Un-named product';
+                    const opt = document.createElement('option');
+                    opt.value = id;
+                    opt.textContent = name;
+                    if (id === prevVal) {
+                        opt.selected = true;
+                    }
+                    cameraProductSelect.appendChild(opt);
+                });
+            }
+
+            // Sync product selector name changes
+            productsList.addEventListener('input', (e) => {
+                if (e.target.classList.contains('prod-name')) {
+                    updateCameraProductDropdown();
+                }
+            });
+
+            // Sync category updates
+            categoriesList.addEventListener('input', (e) => {
+                if (e.target.classList.contains('cat-name')) {
+                    refreshCategoriesList();
+                }
+            });
+
+            // Render promotional card Settings
+            function renderPromoCard(promo, index) {
+                const div = document.createElement('div');
+                div.className = 'promo-form-card';
+                div.dataset.index = index;
+                div.innerHTML = `
+                    <h3 class="promo-card-index">Banner Slot ${index + 1} (${promo.type.toUpperCase()})</h3>
+                    <div class="form-grid">
+                        <input type="hidden" class="promo-type" value="${promo.type}">
+                        <input type="hidden" class="promo-id" value="${promo.id}">
+                        <div class="form-group">
+                            <label>Label</label>
+                            <input type="text" class="promo-label-input" value="${promo.label}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Heading Line 1</label>
+                            <input type="text" class="promo-heading-input" value="${promo.heading}" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Background Image Path</label>
+                            <input type="text" class="promo-image-input" value="${promo.image}" required>
+                        </div>
+                    </div>
+                `;
+                promosList.appendChild(div);
+            }
+
+            // Listeners for new item creations
+            addCategoryBtn.addEventListener('click', () => {
+                const newId = Date.now();
+                renderCategoryRow({ id: newId, name: 'NEW CATEGORY', image: 'assets/cat_bats.png', link: '#' });
+                refreshCategoriesList();
+            });
+
+            addProductBtn.addEventListener('click', () => {
+                const newId = Date.now();
+                const defaultCat = currentCategories[0] || 'CRICKET BATS';
+                renderProductRow({ id: newId, name: 'New Product Item', category: defaultCat, price: 999, image: 'assets/cat_accessories.png' });
+                updateCameraProductDropdown();
+            });
+
+            // HTML5 Camera Access Controls
+            async function startCamera() {
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                    webcamFeed.srcObject = stream;
+                    startCameraBtn.style.display = 'none';
+                    snapPhotoBtn.style.display = 'inline-block';
+                    stopCameraBtn.style.display = 'inline-block';
+                    showStatus('Webcam started successfully.', 'info');
+                } catch (err) {
+                    showStatus('Could not access camera: ' + err.message, 'error');
+                }
+            }
+
+            function stopCamera() {
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                    webcamFeed.srcObject = null;
+                    stream = null;
+                    startCameraBtn.style.display = 'inline-block';
+                    snapPhotoBtn.style.display = 'none';
+                    stopCameraBtn.style.display = 'none';
+                }
+            }
+
+            startCameraBtn.addEventListener('click', startCamera);
+            stopCameraBtn.addEventListener('click', stopCamera);
+
+            // Webcam Capture & Snap Uploading logic
+            snapPhotoBtn.addEventListener('click', async () => {
+                const targetProductId = cameraProductSelect.value;
+                if (!targetProductId) {
+                    alert('Please select which product to assign this photo to first.');
+                    return;
+                }
+
+                // Snap frame to canvas
+                const ctx = photoCanvas.getContext('2d');
+                photoCanvas.width = webcamFeed.videoWidth || 640;
+                photoCanvas.height = webcamFeed.videoHeight || 480;
+                
+                // Draw current webcam frame
+                ctx.drawImage(webcamFeed, 0, 0, photoCanvas.width, photoCanvas.height);
+                
+                // Convert to base64
+                const base64Data = photoCanvas.toDataURL('image/png');
+                const filename = `snap_${targetProductId}_${Date.now()}.png`;
+
+                try {
+                    // Upload Base64 to server API
+                    const response = await fetch('/api/upload', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ imageBase64: base64Data, filename: filename })
+                    });
+
+                    if (!response.ok) throw new Error('Upload failed');
+                    const result = await response.json();
+
+                    if (result.success) {
+                        // Dynamically update the specific product's input field on the form
+                        const inputField = document.getElementById(`prodImg_${targetProductId}`);
+                        if (inputField) {
+                            inputField.value = result.url;
+                            showStatus(`Photo snapped and assigned to product! Saved as: ${result.url}`, 'success');
+                            // flash feedback outline
+                            inputField.style.borderColor = '#2ecc71';
+                            setTimeout(() => inputField.style.borderColor = '', 1500);
+                        }
+                    }
+                } catch (error) {
+                    showStatus('Error uploading snapshot: ' + error.message, 'error');
+                }
+            });
+
+            // Revert changes listener
+            resetBtn.addEventListener('click', () => {
+                if (originalData) {
+                    populateForm(originalData);
+                    showStatus('Changes reverted to original settings.', 'info');
+                }
+            });
+
+            // Handle Submit Form
+            adminForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Stop camera stream to free webcam hardware resource on submit
+                stopCamera();
+
+                // Collect categories list
+                const categoryRows = document.querySelectorAll('.category-row');
+                const categories = Array.from(categoryRows).map(row => ({
+                    id: parseInt(row.dataset.id),
+                    name: row.querySelector('.cat-name').value,
+                    image: row.querySelector('.cat-image').value,
+                    link: '#'
+                }));
+
+                // Collect products list
+                const productRows = document.querySelectorAll('.product-row');
+                const products = Array.from(productRows).map(row => ({
+                    id: parseInt(row.dataset.id),
+                    name: row.querySelector('.prod-name').value,
+                    category: row.querySelector('.product-cat-select').value,
+                    price: parseFloat(row.querySelector('.prod-price').value),
+                    image: row.querySelector('.prod-image').value
+                }));
+
+                // Collect promos list
+                const promoCards = document.querySelectorAll('.promo-form-card');
+                const promos = Array.from(promoCards).map(card => ({
+                    id: parseInt(card.querySelector('.promo-id').value),
+                    type: card.querySelector('.promo-type').value,
+                    label: card.querySelector('.promo-label-input').value,
+                    heading: card.querySelector('.promo-heading-input').value,
+                    image: card.querySelector('.promo-image-input').value
+                }));
+
+                // Collect full payload
+                const payload = {
+                    hero: {
+                        subtitle: document.getElementById('heroSubtitle').value,
+                        image: document.getElementById('heroImage').value,
+                        title_part1: document.getElementById('heroTitle1').value,
+                        title_part2: document.getElementById('heroTitle2').value,
+                        title_part3: document.getElementById('heroTitle3').value,
+                        description: document.getElementById('heroDesc').value
+                    },
+                    categories: categories,
+                    products: products,
+                    promos: promos
+                };
+
+                try {
+                    const response = await fetch('/api/data', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) throw new Error('Server returned error status');
+                    const resJson = await response.json();
+                    
+                    if (resJson.success) {
+                        showStatus('Storefront configuration saved and updated successfully!', 'success');
+                        originalData = payload; // update baseline
+                    } else {
+                        throw new Error(resJson.error || 'Failed to save configuration');
+                    }
+                } catch (error) {
+                    showStatus('Error saving configurations: ' + error.message, 'error');
+                }
+            });
+
+            // Show status alert box
+            function showStatus(msg, type) {
+                statusMsg.textContent = msg;
+                statusMsg.className = `status-msg msg-${type}`;
+                statusMsg.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => {
+                    statusMsg.style.display = 'none';
+                }, 5000);
+            }
+
+            // Initial load
+            loadData();
+        });
+    </script>
+</body>
+</html>

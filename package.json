@@ -1,0 +1,16 @@
+{
+  "name": "eighteen-sports",
+  "version": "1.0.0",
+  "description": "Premium Cricket E-Commerce Landing Page with Local Express Backend and GSAP Animations",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "author": "Antigravity",
+  "license": "ISC"
+}

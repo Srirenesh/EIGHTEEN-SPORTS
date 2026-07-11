@@ -1,0 +1,140 @@
+{
+  "hero": {
+    "subtitle": "EIGHTEEN PREMIUM SPORTS",
+    "image": "assets/hero_gear_banner.png",
+    "title_part1": "PLAY HARD.",
+    "title_part2": "PLAY FEARLESS.",
+    "title_part3": "PLAY EIGHTEEN.",
+    "description": "Your one-stop destination for premium quality cricket gear."
+  },
+  "categories": [
+    {
+      "id": 1,
+      "name": "CRICKET BATS",
+      "image": "assets/cat_bats.png",
+      "link": "#"
+    },
+    {
+      "id": 2,
+      "name": "BATTING",
+      "image": "assets/cat_batting.png",
+      "link": "#"
+    },
+    {
+      "id": 3,
+      "name": "BOWLING",
+      "image": "assets/cat_bowling.png",
+      "link": "#"
+    },
+    {
+      "id": 4,
+      "name": "WICKET KEEPING",
+      "image": "assets/cat_keeping.png",
+      "link": "#"
+    },
+    {
+      "id": 5,
+      "name": "PADS",
+      "image": "assets/cat_pads.png",
+      "link": "#"
+    },
+    {
+      "id": 6,
+      "name": "HELMETS",
+      "image": "assets/cat_helmets.png",
+      "link": "#"
+    },
+    {
+      "id": 7,
+      "name": "SHOES",
+      "image": "assets/cat_shoes.png",
+      "link": "#"
+    },
+    {
+      "id": 8,
+      "name": "KITBAGS",
+      "image": "assets/cat_kitbags.png",
+      "link": "#"
+    },
+    {
+      "id": 9,
+      "name": "ACCESSORIES",
+      "image": "assets/cat_accessories.png",
+      "link": "#"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "TON English Willow Bat",
+      "category": "CRICKET BATS",
+      "price": 14999,
+      "image": "assets/cat_bats.png"
+    },
+    {
+      "id": 2,
+      "name": "SS Elite Batting Gloves",
+      "category": "BATTING",
+      "price": 2499,
+      "image": "assets/cat_batting.png"
+    },
+    {
+      "id": 3,
+      "name": "Kookaburra Turf Match Ball",
+      "category": "BOWLING",
+      "price": 1299,
+      "image": "assets/cat_bowling.png"
+    },
+    {
+      "id": 4,
+      "name": "Shrey Master Class Helmet",
+      "category": "HELMETS",
+      "price": 4999,
+      "image": "assets/cat_helmets.png"
+    },
+    {
+      "id": 5,
+      "name": "SS Test Pro Leg Pads",
+      "category": "PADS",
+      "price": 3899,
+      "image": "assets/cat_pads.png"
+    },
+    {
+      "id": 6,
+      "name": "Adidas Cricket Spikes",
+      "category": "SHOES",
+      "price": 5499,
+      "image": "assets/cat_shoes.png"
+    },
+    {
+      "id": 7,
+      "name": "SS Custom Match Ball",
+      "category": "BOWLING",
+      "price": 1499,
+      "image": "assets/cat_bowling.png"
+    }
+  ],
+  "promos": [
+    {
+      "id": 1,
+      "type": "red",
+      "label": "NEW ARRIVALS",
+      "heading": "ENGLISH WILLOW PREMIUM BATS",
+      "image": "assets/banner_bats.png"
+    },
+    {
+      "id": 2,
+      "type": "yellow",
+      "label": "UP TO 30% OFF",
+      "heading": "EXCLUSIVE OFFERS",
+      "image": "assets/banner_exclusive.png"
+    },
+    {
+      "id": 3,
+      "type": "blue",
+      "label": "GEAR UP",
+      "heading": "FOR EVERY INNING",
+      "image": "assets/banner_inning.png"
+    }
+  ]
+}
