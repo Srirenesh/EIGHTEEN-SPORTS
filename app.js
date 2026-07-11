@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
 
     // Global states shared between static and dynamic bindings
-    let cartCount = 0;
+    let cart = [];
     let allProducts = [];
 
     // Initializations
@@ -149,22 +149,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Bind Add to Cart listeners to both static and dynamic elements
     function bindDynamicCartClicks() {
-        const cartBadge = document.getElementById('cartBadge');
         const cartBtn = document.getElementById('cartBtn');
         
         document.querySelectorAll('.btn-add-cart').forEach(btn => {
             // Remove previous listener to avoid double binding
-            btn.replaceWith(btn.cloneNode(true));
-        });
-
-        // Re-query and bind click
-        document.querySelectorAll('.btn-add-cart').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            const newBtn = btn.cloneNode(true);
+            btn.replaceWith(newBtn);
+            
+            newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                cartCount++;
-                if (cartBadge) cartBadge.textContent = cartCount;
-                if (cartBtn) {
-                    gsap.fromTo(cartBtn, { scale: 1 }, { scale: 1.3, duration: 0.15, yoyo: true, repeat: 1 });
+                const prodName = newBtn.getAttribute('data-name');
+                if (prodName) {
+                    addToCart(prodName);
+                    if (cartBtn) {
+                        gsap.fromTo(cartBtn, { scale: 1 }, { scale: 1.3, duration: 0.15, yoyo: true, repeat: 1 });
+                    }
                 }
             });
         });
@@ -358,12 +357,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (shopNowBtn) {
         shopNowBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            cartCount++;
-            const cartBadge = document.getElementById('cartBadge');
-            const cartBtn = document.getElementById('cartBtn');
-            if (cartBadge) cartBadge.textContent = cartCount;
-            if (cartBtn) {
-                gsap.fromTo(cartBtn, { scale: 1 }, { scale: 1.3, duration: 0.15, yoyo: true, repeat: 1 });
+            const sectionEl = document.getElementById('productsSection');
+            if (sectionEl) {
+                sectionEl.scrollIntoView({ behavior: 'smooth' });
             }
         });
     }
@@ -618,5 +614,160 @@ document.addEventListener('DOMContentLoaded', () => {
             { opacity: 0, y: 30 },
             { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: 'power2.out' }
         );
+    }
+
+    // 12. Cart Drawer Management and Operations
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartDrawerOverlay = document.getElementById('cartDrawerOverlay');
+    const cartBtn = document.getElementById('cartBtn');
+    const cartCloseBtn = document.getElementById('cartCloseBtn');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    if (cartBtn) {
+        cartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCart();
+        });
+    }
+
+    if (cartCloseBtn) {
+        cartCloseBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeCart();
+        });
+    }
+
+    if (cartDrawerOverlay) {
+        cartDrawerOverlay.addEventListener('click', () => {
+            closeCart();
+        });
+    }
+
+    function openCart() {
+        if (cartDrawer) cartDrawer.classList.add('active');
+        if (cartDrawerOverlay) cartDrawerOverlay.classList.add('active');
+    }
+
+    function closeCart() {
+        if (cartDrawer) cartDrawer.classList.remove('active');
+        if (cartDrawerOverlay) cartDrawerOverlay.classList.remove('active');
+    }
+
+    function addToCart(productName) {
+        const product = allProducts.find(p => p.name === productName);
+        if (!product) return;
+
+        const existingItem = cart.find(item => item.product.name === productName);
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({ product, quantity: 1 });
+        }
+
+        updateCartUI();
+        openCart();
+    }
+
+    function changeQty(productName, delta) {
+        const item = cart.find(item => item.product.name === productName);
+        if (!item) return;
+
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+            cart = cart.filter(item => item.product.name !== productName);
+        }
+
+        updateCartUI();
+    }
+
+    function removeFromCart(productName) {
+        cart = cart.filter(item => item.product.name !== productName);
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const cartDrawerItems = document.getElementById('cartDrawerItems');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartCountHeader = document.getElementById('cartCountHeader');
+        const cartSubtotalAmount = document.getElementById('cartSubtotalAmount');
+
+        if (!cartDrawerItems) return;
+
+        // Calculate count and total
+        const totalItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+
+        // Update badge counters
+        if (cartBadge) cartBadge.textContent = totalItemsCount;
+        if (cartCountHeader) cartCountHeader.textContent = totalItemsCount;
+
+        // Update subtotal
+        const formattedSubtotal = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0
+        }).format(subtotal);
+        if (cartSubtotalAmount) cartSubtotalAmount.textContent = formattedSubtotal;
+
+        // Render items
+        if (cart.length === 0) {
+            cartDrawerItems.innerHTML = '<div class="cart-empty-message">Your cart is currently empty.</div>';
+            if (checkoutBtn) checkoutBtn.disabled = true;
+        } else {
+            cartDrawerItems.innerHTML = '';
+            cart.forEach(item => {
+                const formattedItemPrice = new Intl.NumberFormat('en-IN', {
+                    style: 'currency',
+                    currency: 'INR',
+                    maximumFractionDigits: 0
+                }).format(item.product.price * item.quantity);
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-drawer-item';
+                itemDiv.innerHTML = `
+                    <img src="${item.product.image}" alt="${item.product.name}">
+                    <div class="cart-item-info">
+                        <span class="cart-item-cat">${item.product.category}</span>
+                        <h4 class="cart-item-name">${item.product.name}</h4>
+                        <div class="cart-item-price">${formattedItemPrice}</div>
+                        <div class="cart-item-qty-row">
+                            <button class="qty-btn minus-btn" data-name="${item.product.name}">-</button>
+                            <span class="cart-item-qty">${item.quantity}</span>
+                            <button class="qty-btn plus-btn" data-name="${item.product.name}">+</button>
+                            <button class="remove-item-btn" data-name="${item.product.name}">Remove</button>
+                        </div>
+                    </div>
+                `;
+                cartDrawerItems.appendChild(itemDiv);
+            });
+
+            if (checkoutBtn) checkoutBtn.disabled = false;
+
+            // Bind click handlers for item buttons
+            cartDrawerItems.querySelectorAll('.minus-btn').forEach(btn => {
+                btn.addEventListener('click', () => changeQty(btn.getAttribute('data-name'), -1));
+            });
+            cartDrawerItems.querySelectorAll('.plus-btn').forEach(btn => {
+                btn.addEventListener('click', () => changeQty(btn.getAttribute('data-name'), 1));
+            });
+            cartDrawerItems.querySelectorAll('.remove-item-btn').forEach(btn => {
+                btn.addEventListener('click', () => removeFromCart(btn.getAttribute('data-name')));
+            });
+        }
+    }
+
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            // Build custom order details message for WhatsApp checkout (premium experience)
+            let message = "Hi Eighteen Sports, I'd like to place an order for the following:\n\n";
+            cart.forEach(item => {
+                message += `- ${item.product.name} x ${item.quantity} (₹${item.product.price * item.quantity})\n`;
+            });
+            const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+            message += `\nTotal: ₹${subtotal}\n\nPlease confirm my order. Thanks!`;
+            
+            const whatsappUrl = `https://wa.me/918270939177?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
     }
 });

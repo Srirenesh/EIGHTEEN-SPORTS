@@ -333,13 +333,13 @@
         </div>
     </section>
 
-    <!-- Featured Products Section -->
-    <section class="products-section">
+    <section class="products-section" id="productsSection">
         <div class="section-title-wrapper">
             <span class="title-line"></span>
-            <h2 class="section-title">FEATURED <span class="text-red">PRODUCTS</span></h2>
+            <h2 class="section-title" id="productsSectionTitle">FEATURED <span class="text-red">PRODUCTS</span></h2>
             <span class="title-line"></span>
         </div>
+        <button id="resetFilterBtn" class="btn btn-outline" style="display: none; margin: -20px auto 30px auto; font-size: 11px; padding: 8px 15px; border-radius: 4px; font-weight: 700; letter-spacing: 0.5px; border-color: var(--accent-red); color: var(--accent-red);">RESET FILTER</button>
 
         <div class="products-grid" id="productsGrid">
             <!-- Fallback Content (SEO Friendly, replaced dynamically by app.js) -->
@@ -512,6 +512,31 @@
             <p>&copy; 2026 Eighteen Sports. All Rights Reserved. Built with Premium Quality.</p>
         </div>
     </footer>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>SHOPPING CART (<span id="cartCountHeader">0</span>)</h3>
+            <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close Cart">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="cart-drawer-items" id="cartDrawerItems">
+            <!-- Populated dynamically via JS -->
+            <div class="cart-empty-message">Your cart is currently empty.</div>
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotalAmount">₹0</span>
+            </div>
+            <button class="btn btn-red checkout-btn" id="checkoutBtn" style="width: 100%;" disabled>PROCEED TO CHECKOUT</button>
+        </div>
+    </div>
 
     <!-- App Logic JS -->
     <script src="app.js"></script>

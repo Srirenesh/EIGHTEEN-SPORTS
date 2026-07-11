@@ -145,6 +145,20 @@
       "category": "BATTING GRIPS",
       "price": 299,
       "image": "assets/cat_grips.png"
+    },
+    {
+      "id": 11,
+      "name": "SS Gladiator Wicket Keeping Gloves",
+      "category": "WICKET KEEPING",
+      "price": 3499,
+      "image": "assets/cat_keeping.png"
+    },
+    {
+      "id": 12,
+      "name": "Eighteen Pro Player Duffle Kitbag",
+      "category": "KITBAGS",
+      "price": 5999,
+      "image": "assets/cat_kitbags.png"
     }
   ],
   "promos": [
