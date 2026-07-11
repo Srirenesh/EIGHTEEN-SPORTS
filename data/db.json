@@ -16,13 +16,13 @@
     },
     {
       "id": 2,
-      "name": "BATTING",
+      "name": "BATTING GLOVES",
       "image": "assets/cat_batting.png",
       "link": "#"
     },
     {
       "id": 3,
-      "name": "BOWLING",
+      "name": "BALLS",
       "image": "assets/cat_bowling.png",
       "link": "#"
     },
@@ -61,6 +61,18 @@
       "name": "ACCESSORIES",
       "image": "assets/cat_accessories.png",
       "link": "#"
+    },
+    {
+      "id": 10,
+      "name": "COOLERS",
+      "image": "assets/cat_coolers.png",
+      "link": "#"
+    },
+    {
+      "id": 11,
+      "name": "BATTING GRIPS",
+      "image": "assets/cat_grips.png",
+      "link": "#"
     }
   ],
   "products": [
@@ -74,14 +86,14 @@
     {
       "id": 2,
       "name": "SS Elite Batting Gloves",
-      "category": "BATTING",
+      "category": "BATTING GLOVES",
       "price": 2499,
       "image": "assets/cat_batting.png"
     },
     {
       "id": 3,
       "name": "Kookaburra Turf Match Ball",
-      "category": "BOWLING",
+      "category": "BALLS",
       "price": 1299,
       "image": "assets/cat_bowling.png"
     },
@@ -109,9 +121,30 @@
     {
       "id": 7,
       "name": "SS Custom Match Ball",
-      "category": "BOWLING",
+      "category": "BALLS",
       "price": 1499,
       "image": "assets/cat_bowling.png"
+    },
+    {
+      "id": 8,
+      "name": "SS Matrix Arm Guard",
+      "category": "ACCESSORIES",
+      "price": 699,
+      "image": "assets/cat_accessories.png"
+    },
+    {
+      "id": 9,
+      "name": "Eighteen Pro Polarized Sunglasses",
+      "category": "COOLERS",
+      "price": 2499,
+      "image": "assets/cat_coolers.png"
+    },
+    {
+      "id": 10,
+      "name": "Eighteen Premium Octopus Bat Grip",
+      "category": "BATTING GRIPS",
+      "price": 299,
+      "image": "assets/cat_grips.png"
     }
   ],
   "promos": [
